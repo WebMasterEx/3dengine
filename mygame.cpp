@@ -16,6 +16,8 @@ bool CGame::Init() {
 	models["Test2"]->setPosition(-5, -5, 0);
 	models["Test2"]->setMaterial(material);
 
+	models["T"] = m_ResourceManager->loadModelFromXml("model.xml");
+
 	D3DXCreateTeapot(m_Render->getDevice(), &mesh, NULL);
 
 	light = new CLight();

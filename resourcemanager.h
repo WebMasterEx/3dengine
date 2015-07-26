@@ -29,10 +29,10 @@ public:
 	CMaterial* loadMaterialFromXmlNode(TiXmlElement* node);
 	CMaterial* getMaterialByName(std::string name);
 
-	Model* loadModelFromFile(std::string filename);
+	Model* loadModelFromXml(std::string filename);
 	Model* loadModelFromXmlNode(TiXmlElement* node);
 
-	void loadSceneFromFile(std::string filename);
+	//void loadSceneFromFile(std::string filename);
 
 	//CFont* loadFont();
 
@@ -40,7 +40,7 @@ public:
 
 protected:
 	IDirect3DDevice9* m_Device;
-	std::map<std::string, Model*> m_ModelsCache;
+	std::map<std::string, Model*> m_ModelCache;
 	std::map<std::string, CTexture*> m_TextureCache;
 	std::map<std::string, CMaterial*> m_MaterialCache;
 };

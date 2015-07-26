@@ -18,7 +18,7 @@ HRESULT CLight::Initialize(IDirect3DDevice9* device, LIGHT_TYPE type, int index)
 
 	//m_Light.Range = 1000.0;
 	setType(type);
-
+	
 	return hr;
 }
 
@@ -26,6 +26,10 @@ void CLight::setType(LIGHT_TYPE type) {
 	switch (type) {
 		case LIGHT_DIRECTIONAL:
 			m_Light.Type = D3DLIGHT_DIRECTIONAL;
+		break;
+
+		case LIGHT_POINT:
+			m_Light.Type = D3DLIGHT_POINT;
 		break;
 	}
 
@@ -55,10 +59,28 @@ void CLight::setSpecularColor(D3DXCOLOR color) {
 }
 
 void CLight::Enable() {
-	m_Device->SetLight(m_Index, &m_Light);
+	
 	m_Device->LightEnable(m_Index, TRUE);
+}
+
+void CLight::Set() {
+	m_Device->SetLight(m_Index, &m_Light);
 }
 
 void CLight::Disable() {
 	m_Device->LightEnable(m_Index, FALSE);
+}
+
+void CLight::setAttenuation(float a0, float a1, float a2) {
+	m_Light.Attenuation0 = a0;
+	m_Light.Attenuation1 = a1;
+	m_Light.Attenuation2 = a2;
+}
+
+void CLight::setRange(float range) {
+	m_Light.Range = range;
+}
+
+void CLight::setPosition(float x, float y, float z) {
+	m_Light.Position = D3DXVECTOR3(x, y, z);
 }

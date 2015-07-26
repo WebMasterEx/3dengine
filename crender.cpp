@@ -1,4 +1,5 @@
 #include "crender.h"
+#include "log.h"
 
 CRender::CRender() {
 	m_d3d9 = NULL;
@@ -10,6 +11,8 @@ CRender::~CRender() {
 }
 
 HRESULT CRender::Initialize(HWND hWnd, int width, int height, bool isWindowed) {
+	Log::Write("Initialize Render!");
+
 	HRESULT hr = S_OK;
 	m_hWnd = hWnd;
 

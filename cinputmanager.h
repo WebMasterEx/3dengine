@@ -12,7 +12,6 @@
 
 struct MousePositionState {
 	MousePositionState() : x(0), y(0) {
-
 	};
 
 	float x, y, z;

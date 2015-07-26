@@ -1,4 +1,5 @@
 #include "cinputmanager.h"
+#include "log.h"
 
 CInputManager::CInputManager() {
 	m_MouseState = NULL;
@@ -14,6 +15,8 @@ CInputManager::~CInputManager() {
 HRESULT CInputManager::Initialize(HWND hWnd) {
 	HRESULT hr = S_OK;
 	m_hWnd = hWnd;
+
+	Log::Write("Initialize InputManager!");
 
 	unsigned short i;
 

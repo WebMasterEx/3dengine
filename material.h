@@ -1,7 +1,7 @@
 #pragma once
 
+#include <d3d9.h>
 #include <Windows.h>
-#include "dxu.h"
 
 class CMaterial {
 public:

@@ -1,4 +1,5 @@
 #include "resourcemanager.h"
+#include "log.h"
 
 CResourceManager::CResourceManager() {
 	m_Device = NULL;
@@ -10,6 +11,8 @@ CResourceManager::~CResourceManager() {
 
 HRESULT CResourceManager::Initialize(IDirect3DDevice9* device) {
 	m_Device = device;
+
+	Log::Write("Initialize ResourceManager!");
 
 	return S_OK;
 }
@@ -79,7 +82,7 @@ CMaterial* CResourceManager::getMaterialByName(std::string name) {
 Model* CResourceManager::getModelByName(std::string name) {
 	return m_ModelCache.find(name)->second;
 }
-
+/**
 CMaterial* CResourceManager::loadMaterialFromFile(std::string filename) {
 	TiXmlDocument *xml_file = new TiXmlDocument(filename.c_str());
 	if(!xml_file->LoadFile()) return NULL; 
@@ -172,4 +175,4 @@ Model* CResourceManager::loadModelFromXmlNode(TiXmlElement* node) {
 	m_ModelCache[name] = model;
 
 	return model;
-}
+}*/

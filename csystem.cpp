@@ -15,6 +15,9 @@ CSystem::~CSystem() {
 }
 
 HRESULT CSystem::Initialize(CWindow* window) {
+	Log::Initialize("log.txt");
+	Log::Write("Start system initialize!");
+
 	HRESULT hr = S_OK;
 	m_Window = window;
 	m_InputManager = new CInputManager();
@@ -36,7 +39,10 @@ HRESULT CSystem::Initialize(CWindow* window) {
 		return hr;
 	}
 
+	Log::Write("Initialize callback!");
 	initCallback();
+
+	Log::Write("Initialize done!");
 
 	return hr;
 }

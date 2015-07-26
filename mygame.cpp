@@ -8,7 +8,11 @@ bool CGame::Init() {
 	models["Test"] = m_ResourceManager->loadModelCube(5, 5, 5);
 	models["Test"]->setPosition(-5, -5, 5);
 
-	CMaterial* material = m_ResourceManager->loadMaterialFromFile("material.xml");
+	CMaterial* material = new CMaterial();
+	material->Initialize(m_Render->getDevice());
+	material->setDiffuseColor(1, 1, 1, 1);
+	material->setAmbientColor(1, 1, 1, 1);
+
 	models["Test"]->setMaterial(material);
 	models["Test"]->enableLight(true);
 
@@ -16,25 +20,30 @@ bool CGame::Init() {
 	models["Test2"]->setPosition(-5, -5, 0);
 	models["Test2"]->setMaterial(material);
 
-	models["T"] = m_ResourceManager->loadModelFromXml("model.xml");
-
 	D3DXCreateTeapot(m_Render->getDevice(), &mesh, NULL);
 
-	light = new CLight();
-	light->Initialize(m_Render->getDevice(), LIGHT_DIRECTIONAL, 0);
-	light->setDiffuseColor(D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f));
-	light->setDirection(D3DXVECTOR3(0.0f, 6.0f, 0.0f));
+	//light = new CLight();
+	//light->Initialize(m_Render->getDevice(), LIGHT_DIRECTIONAL, 0);
+	//light->setDiffuseColor(D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f));
+	//light->setDirection(D3DXVECTOR3(0.0f, 6.0f, 0.0f));
 
+	//light->Enable();
+
+	m_Render->getDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_Render->getDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_Render->getDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+	light = new CLight();
+	light->Initialize(m_Render->getDevice(), LIGHT_POINT, 0);
+	light->setDiffuseColor(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+	light->setAmbientColor(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f));
+	light->setPosition(50, 50, 50);
+	light->setRange(100);
+
+	light->Set();
 	light->Enable();
 
-	light2 = new CLight();
-	light2->Initialize(m_Render->getDevice(), LIGHT_DIRECTIONAL, 1);
-	light2->setDiffuseColor(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f));
-	light2->setDirection(D3DXVECTOR3(-6.0f, -0.6f, -6.0f));
-
-	light2->Enable();
-
-	//m_Render->getDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW) ;
+	m_Render->getDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
 
 
 	return true;

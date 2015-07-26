@@ -4,7 +4,7 @@
 #include "dxu.h"
 
 enum LIGHT_TYPE {
-	LIGHT_DIRECTIONAL=0
+	LIGHT_DIRECTIONAL=0, LIGHT_POINT
 };
 
 class CLight {
@@ -23,7 +23,12 @@ public:
 	void setAmbientColor(D3DXCOLOR color);
 	void setSpecularColor(D3DXCOLOR color);
 
-
+	// Для точечного света
+	void setAttenuation(float a0, float a1, float a2);
+	void setRange(float range);
+	void setPosition(float x, float y, float z);
+	
+	void Set();
 	void Enable();
 	void Disable();
 

@@ -6,6 +6,7 @@
 #include "crender.h"
 #include "light.h"
 #include "resourcemanager.h"
+#include "log.h"
 
 enum CSystemEvent {
 	EVENT_INIT, EVENT_SHUTDOWN, EVENT_UPDATE, EVENT_RENDER
